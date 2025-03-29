@@ -13,3 +13,8 @@ def index(request):
     context = {'products': products}
     return render(request, 'ecom/index.html', context=context)
 
+def product_detail(request, product_id):
+    product = Product.objects.get(id=product_id)
+    context = {'product': product}
+    return render(request, 'ecom/product-detail.html', context=context)
+

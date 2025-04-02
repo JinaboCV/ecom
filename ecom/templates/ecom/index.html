@@ -27,7 +27,7 @@
                                 <div class="card-text" style="color: orange;">XAF {{product.price}}</div>
                                 <br>
                                 <a href="{% url 'product-detail' product.id %}" class="btn btn-warning ">Details</a>
-                                <button class="btn btn-success item-cart">Add to cart</button>
+                                <button id="{{product.id}}" class="btn btn-success item-cart">Add to cart</button>
                             </div>
                         </div>
                     </div>
@@ -73,6 +73,19 @@
         
         $(document).on('click', '.item-cart', function () {
             console.log('add');
-        })
+            var item_id = this.id.toString();
+            console.log(item_id);
+            if (cart[item_id] != undefined) {
+                cart[item_id] = cart[item_id] + 1;
+            } else {
+                cart[item_id] = 1;
+            }
+            console.log(cart);
+            localStorage.setItem('cart', JSON.stringify(cart));
+            document.getElementById("panier").innerHTML = "Cart(" + Object.keys(cart).length + ")";
+        });
+       $(function () {
+        $('[data-toggle="popover"]').popover();
+       })
     </script>
 {% endblock %}

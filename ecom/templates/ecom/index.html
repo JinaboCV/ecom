@@ -27,7 +27,7 @@
                                 <div class="card-text" style="color: orange;">XAF {{product.price}}</div>
                                 <br>
                                 <a href="{% url 'product-detail' product.id %}" class="btn btn-warning ">Details</a>
-                                <button class="btn btn-success">Add to cart</button>
+                                <button class="btn btn-success item-cart">Add to cart</button>
                             </div>
                         </div>
                     </div>
@@ -60,4 +60,19 @@
              </div>
         </div>
     </div>
+{% endblock %}
+
+{% block js %}
+    <script type="text/javascript">
+        console.log('just to test')
+        if (localStorage.getItem('cart') == null) {
+            var cart = {};
+        } else {
+            cart = JSON.parse(localStorage.getItem('cart'));
+        }
+        
+        $(document).on('click', '.item-cart', function () {
+            console.log('add');
+        })
+    </script>
 {% endblock %}
